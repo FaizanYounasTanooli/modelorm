@@ -8,7 +8,7 @@ stu.name="Faizan";
 stu.age=123;
 Ctx.students.Add(stu);
 const a = "awef";
-Ctx.students.Where((item=>item.name==a ||  item.age==123).bind(a))
+Ctx.students.Where(item=>item.name==a ||  item.age==123)
 .Where(y=>y.age==76)
 .Select(y=>y.name)
 .Where(y=>y=="awef")
