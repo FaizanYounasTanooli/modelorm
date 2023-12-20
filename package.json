@@ -1,0 +1,30 @@
+{
+  "name": "modelorm",
+  "version": "1.0.0",
+  "description": "This is highly advance orm ",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaizanYounasTanooli/modelorm.git"
+  },
+  "keywords": [
+    "orm",
+    "orm",
+    "js",
+    "advance",
+    "model"
+  ],
+  "author": "Faizan Younas Tanooli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FaizanYounasTanooli/modelorm/issues"
+  },
+  "homepage": "https://github.com/FaizanYounasTanooli/modelorm#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
