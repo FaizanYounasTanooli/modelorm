@@ -1,5 +1,5 @@
 import IList from "../interfaces/IListT";
-import IQueryable from "../interfaces/IQueryableT";
+import IQueryable from "../interfaces/IQueryable";
 import { List } from "./List";
 type Filters<T> = (item: T) => boolean; 
 type Selectors<T, TResult> = (item: T) => TResult;
@@ -29,39 +29,47 @@ export default class DBSet<T extends object> implements IQueryable<T> {
     Where<K extends keyof T>(
         predicate: (item: Pick<T, K>) => boolean
     ): IQueryable<T> {
+
         this.predicates.push(predicate);
         return this as IQueryable<T>;
-        
     }
     
     
-    ToArray(): any {
+    
+    ToList(): List<T> {
         const selectors=this.selectors?.join(" ");
         console.log(selectors);
-
         console.log(this.createWhereClause(this.predicates));
-        return "";
+        return new List<T>();
 
     }
     processPredicate(predicate:string) {
             const word= predicate.substring(0,predicate.indexOf("=>")).trim();
-            const replaceRegex = new RegExp(word, 'g');
+            const replaceRegex = new RegExp(`(?:^|\\s)${word}\\b`, 'g');
             const removeRegex= new RegExp("\\s*"+word+"\\s*=>");
-            return predicate.replace(removeRegex,'').replace(replaceRegex,this.TableName);
+            const operators= {
+                '===': ' = ',
+                '==': ' = ',
+                '!=': ' != ',
+                '>=': ' >= ',
+                '<=': ' <= ',
+                '>': ' > ',
+                '<': ' < ',
+                '&&': ' AND ',
+                '\\|\\|': ' OR '
+              };
+              predicate=predicate.replace(removeRegex,'').replace(replaceRegex,this.TableName);
+              for (let ope in operators) {
+                const replaceOpeRegex = new RegExp(ope,'g');
+                predicate=predicate.replace(replaceOpeRegex,operators[ope as keyof typeof operators]);
+              }
+            return predicate;
     }
     createWhereClause(predicates: Filters<T>[] ) {
-        const operators= {
-          '==': '=',
-          '!=': '!=',
-          '>=': '>=',
-          '<=': '<=',
-          '>': '>',
-          '<': '<',
-          '&&': 'AND',
-          '||': 'OR'
-        };
-        let processed=predicates.map(predicate=>this.processPredicate(predicate.toString()))
-        console.log(processed);
-        return processed
+        
+        let processed=predicates.map(predicate=>this.processPredicate(predicate.toString()));
+        let whereClause=" WHERE "+ processed.join(' AND ');
+        console.log(whereClause);
+        return whereClause
       }
 }

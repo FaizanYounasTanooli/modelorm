@@ -6,10 +6,10 @@ applyObjectExtensions();
 let stu = new Student();
 stu.name="Faizan";
 stu.age=123;
-stu.item={name:"123"};
 Ctx.students.Add(stu);
-Ctx.students.Where(item=>item.item?.name=='123')
+const a = "awef";
+Ctx.students.Where((item=>item.name==a ||  item.age==123).bind(a))
 .Where(y=>y.age==76)
 .Select(y=>y.name)
 .Where(y=>y=="awef")
-.ToArray();
+.ToList();
