@@ -1,5 +1,5 @@
-import IEnumerable from "../types/IEnumerable";
-import IList from "../types/IListT";
+import IEnumerable from "../interface/IEnumerable";
+import IList from "../interface/IListT";
 
 type Filters<TEntity> = (item: TEntity) => boolean; 
 export class List<T> implements IList<T> {
