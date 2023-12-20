@@ -1,5 +1,5 @@
-import IList from "../interface/IListT";
-import IQueryable from "../interface/IQueryableT";
+import IList from "../interfaces/IListT";
+import IQueryable from "../interfaces/IQueryableT";
 import { List } from "./List";
 type Filters<T> = (item: T) => boolean; 
 type Selectors<T, TResult> = (item: T) => TResult;
