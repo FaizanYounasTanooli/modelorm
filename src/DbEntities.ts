@@ -1,4 +1,4 @@
-import  Context  from "./interface/Context";
+import  Context  from "./Models/Context";
 import Student from "./Student";
 import DBSet from "./Models/DBSetT";
 export default class myContext extends Context {
