@@ -7,6 +7,7 @@ export default class DBSet<T extends object> implements IQueryable<T> {
     private predicates: { predicate: Filters<T>, values?: object }[] = [];
     private selectors: Function[] = [];
     private currentType: new () => T;
+    
     private TableName: string;
 
     constructor(typeConstructor: new () => T) {
@@ -30,6 +31,7 @@ export default class DBSet<T extends object> implements IQueryable<T> {
     Where<K extends keyof T>(
         predicate: (item: Pick<T, K>) => boolean
         , values?: object): IQueryable<T> {
+
         this.predicates.push({ predicate, values })
         return this as IQueryable<T>;
     }
@@ -37,9 +39,8 @@ export default class DBSet<T extends object> implements IQueryable<T> {
 
 
     ToList(): List<T> {
-        const selectors = this.selectors?.join(" ");
-        //console.log(selectors);
-        console.log(this.createWhereClause(this.predicates));
+        const selectors = this.selectors?.join(" "); 
+        this.createWhereClause(this.predicates)
         return new List<T>();
 
     }
@@ -90,7 +91,6 @@ export default class DBSet<T extends object> implements IQueryable<T> {
         let processed = predicates.map(predicate => this.processPredicate(predicate.predicate.toString(), predicate.values));
         let whereClause = " WHERE " + processed.join(' AND ');
         let columns = this.createSelectClause(this.selectors);
-
         let query = `SELECT ${columns} FROM ${this.TableName} ${whereClause}`;
         console.log(query);
         return query;
