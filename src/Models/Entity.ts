@@ -1,15 +1,16 @@
-export function monitored(target: any, propertyKey: string) {
+export function Column(entity: Entity, propertyKey: string) {
     let value: any;
+
     const getter = function () {
         return value;
     };
 
     const setter = function (newValue: any) {
         value = newValue;
-        console.log(`Property '${propertyKey}' was set to '${value}'.`);
+        entity.print(propertyKey,value)
     };
 
-    Object.defineProperty(target, propertyKey, {
+    Object.defineProperty(entity, propertyKey, {
         get: getter,
         set: setter,
         enumerable: true,
