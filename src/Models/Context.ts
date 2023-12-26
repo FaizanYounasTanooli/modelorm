@@ -1,6 +1,4 @@
-import myContext from "../DbEntities";
-import Student from "../Student";
-import DBSet from "./DBSetT";
+import DbEntities from "../DbEntities";
 
 export default class Context {
     connectionString:string;
@@ -8,7 +6,6 @@ export default class Context {
         this.connectionString=connectionString;
     }
     public  SaveChanges():void {
-        console.log("Saving Changes");
-        console.log((this as unknown as myContext).students .toString())
+       console.log(((this as any) as DbEntities).students)
     }
-}
+} 

@@ -1,10 +1,15 @@
-import myContext from "./DbEntities";
+import DbEntities from "./DbEntities";
 import Student from "./Student";
-let Ctx: myContext = new myContext("");
+let Ctx: DbEntities = new DbEntities("");
 import applyObjectExtensions from "./Object.extensions";
+import Teacher from "./Teacher";
 applyObjectExtensions();
 let stu = new Student();
 stu.name = "Faizan";
+stu.age=13;
+let Teac= new Teacher();
+Teac.TeachName="awfe";
+Ctx.SaveChanges();
 
 // stu.age = 123;
 // Ctx.students.Add(stu);
