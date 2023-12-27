@@ -22,4 +22,5 @@ Ctx.SaveChanges();
 //     .Where(y => y.age == 76)
 //     .Select(item=>item.age)
 //     .ToList();
-    
+       
+
