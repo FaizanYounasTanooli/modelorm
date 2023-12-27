@@ -10,7 +10,7 @@ stu.age=13;
 let Teac= new Teacher();
 Teac.TeachName="awfe";
 Ctx.SaveChanges();
-
+  
 // stu.age = 123;
 // Ctx.students.Add(stu);
 // const a = 123;
