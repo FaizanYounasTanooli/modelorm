@@ -6,4 +6,4 @@ export default class DbEntities extends Context {
     constructor(connectionString:string) {
         super(connectionString);
     }
-}
+}    
